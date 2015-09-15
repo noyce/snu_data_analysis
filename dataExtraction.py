@@ -86,7 +86,7 @@ for x in range(0,477):
         print(x)
     else:
         c.execute("insert into test2 (netId,week1,week2,week3,week4,week5) values(?,?,?,?,?,?)", (batch_2014_netids[x],week[0],week[1],week[2],week[3],week[4]))        
-    x=x+1
+    x +=1
 
 conn.commit()
 conn.close()
