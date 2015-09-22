@@ -1,6 +1,5 @@
 '''
 Author:Aseem Pathak
-B.Tech CSE 2nd year
 github.com/noyce
 '''
 
@@ -15,10 +14,11 @@ browser.open('http://myaccount.snu.edu.in/login.php')
 signin_form = browser.get_form(id="frmUserLogin")
 signin_form        
 
+conn = sqlite3.connect('netUsage.db')
 
 # Filling the login form
-signin_form['snuNetId'].value = 'ab123' #sample form data
-signin_form['password'].value = 'password_goes_here'
+signin_form['snuNetId'].value = str(c.execute("select netId from client")) 
+signin_form['password'].value = str(c.execute("select pass from client"))
 
 
 # And submit
@@ -26,7 +26,7 @@ browser.submit_form(signin_form)
 
 #all netids stored in an array (this array can be huuuge depending on the netids)
 batch_2014_netids =['ab123','xy456','nm890']
-#dates array add/remove the dates you want to analize
+#dates array add/remove the dates you want to analyse
 #for eg. currently array is initialized to calculate weekly usage
 dates=['2015-08-05','2015-08-11','2015-08-12','2015-08-18','2015-08-19','2015-08-25','2015-08-26','2015-09-01','2015-09-02','2015-09-08']
 #initializing the week array (python newbie here)
@@ -34,7 +34,7 @@ week=[0,0,0,0,0]
 x=0
 i=0
 d=0
-conn = sqlite3.connect('netUsage.db')
+
 c = conn.cursor()
 
 
